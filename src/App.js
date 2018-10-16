@@ -1,7 +1,7 @@
 // App.js - WEB
 import React, { Component } from "react";
 import { View } from "react-native";
-import WebRoutesGenerator from "./NativeWebRouteWrapper/index";
+import WebRoutesGenerator from "./NativeWebRouteWrapper";
 import { ModalContainer } from "react-router-modal";
 import HomeScreen from "./HomeScreen";
 import TopNav from "./TopNav";
@@ -34,7 +34,7 @@ const routeMap = {
 class App extends Component {
   render() {
     return (
-      <View>
+      <View style={{ height: "100vh", width: "100vw" }}>
         <TopNav />
         {WebRoutesGenerator({ routeMap })}
         <ModalContainer />

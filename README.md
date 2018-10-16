@@ -1,10 +1,10 @@
-# React Native Web Boilerplate 🥘
+# React Native Web Boilerplate 🥘 with navigation 🗺
 
 A small and simple boilerplate for lazy people to create a universal Web/Native React app. How is that possible? By code sharing between both of those worlds. The most crucial element of this puzzle is a brilliant [React Native Web](https://github.com/necolas/react-native-web) library by [Nicolas Gallagher](http://nicolasgallagher.com).
 
 This boilerplate will save you the hassle of configuring it by your own. Like I said. Lazy bones.
 
-> There's also version with app navigation built in. Check it out here [Link do drugiego boilerplateu]!
+> There's also version without app navigation built in. [Check it out here.](https://github.com/inspmoore/rnw_boilerplate_nav)
 
 ## Installing 🔩
 
@@ -65,6 +65,10 @@ rnw_boilerplate
 ├── node_modules
 ├── public
 ├── src
+│    ├── NativeWebRouteWrapper
+│    │    ├── index.js
+│    │    ├── pop.native.js
+│    │    └── pop.web.js
 │    ├── App.js
 │    ├── App.native.js
 │    ├── HomeScreen.js
@@ -79,6 +83,55 @@ rnw_boilerplate
 `HomeScreen.js` file is an example of a component shared between the platforms. Thanks to React Native Web lib, it is possible to use React Native primitives in the Web environment. Please check out [RNW guide](https://github.com/necolas/react-native-web) for more details.
 
 Also notice that there are separate `App.js` files for Web and Native. This gives a lot of advantages, including adding platform specific libraries to your app.
+
+### Navigation
+
+In the native environment things are simple and easy. Just use [`react-navigation`](https://reactnavigation.org).
+
+Web is however more complicated. In the spirit of RNW I've ported some `react-navigation` functionality using `react-router-dom`. Using a `WebRoutesGenerator` little helper function found in the `NativeWebRouteWrapper` lib you can create routes with a `react-navigation' like API.
+
+First create a route map and pass it to the `WebRoutesGenerator`
+
+```javascript
+const routeMap = {
+  Home: {
+    component: HomeScreen,
+    path: "/",
+    exact: true
+  },
+  Second: {
+    component: SecondScreen,
+    path: "/second"
+  },
+  User: {
+    component: UserScreen,
+    path: "/user/:name?",
+    exact: true
+  },
+  DasModal: {
+    component: DasModalScreen,
+    path: "*/dasmodal",
+    modal: true
+  }
+};
+
+// in the render method
+WebRoutesGenerator({ routeMap });
+```
+
+The components are wrapped in a HOC that adds `navigation` prop. This props has three methods to work with:
+
+- `this.props.navigation`
+  - `navigate(routeName, params)` - go to a screen, pass params
+  - `goBack` - goes one step back in history
+  - `getParam(paramName, fallback)` - get a specific param with fallback
+
+It's a limited copy of [react-navigation navigation prop](https://reactnavigation.org/docs/en/navigation-prop.html).
+
+If you want to have a modal:
+
+- add a `modal: true` flag the route map
+- add `<ModalContainer />` from `react-router-modal` to your app layout
 
 ## Renaming the app ✏️
 
