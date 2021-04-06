@@ -18,29 +18,9 @@ to install all the dependencies.
 
 Runs your app in the browser under the http://localhost:3000.
 
-### `yarn start` or `npm run start`
+### `yarn start-android` or `npm run start-android`
 
-Starts metro bundler for your react native project.
-
-### `yarn start-ios` or `npm run start-ios`
-
-Runs metro bundler and opens the app in the iOS simulator.
-
-### `yarn build` or `npm run build`
-
-Builds your web app for production.
-
-### `yarn test` or `npm run test`
-
-Runs the test environment for the native part.
-
-### `yarn test-web` or `npm run test-web`
-
-Runs the test environment for the web part.
-
-### `yarn eject` or `npm run eject`
-
-Eject your web project to your custom setup.
+Runs metro bundler and opens the app in the Android device or emulator.
 
 ## Usage 🛠
 
