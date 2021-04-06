@@ -1,11 +1,11 @@
-// UserScreen.js - Web
+// UserScreen.js - React Native
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 class UserScreen extends React.Component {
   render() {
-    const { navigation } = this.props;
-    const name = navigation.getParam("name", "No user was defined!"); 
+    const { route } = this.props;
+    const name = route.params?.name??'No user was defined!'
     
     return (
       <View style={styles.container}>
